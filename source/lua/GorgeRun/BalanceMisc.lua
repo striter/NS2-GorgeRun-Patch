@@ -1,0 +1,1 @@
+kClogsPerHive = 3
