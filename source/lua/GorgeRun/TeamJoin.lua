@@ -310,13 +310,7 @@ if Server then
                 local TotalTime = math.floor(enterEnt:GetResources())
                 local Minutes = math.floor(TotalTime / 60)
                 local Seconds = TotalTime - Minutes * 60
-                local GRMessage1 = string.format( "%s completed the course. Total Time: %d:%02d", enterEnt:GetName(), Minutes, Seconds)
-                local GRMessage2 = "Type grstats in console for top scores"
-                Print(GRMessage1)
-                Print(GRMessage2)
-                -- Server.SendNetworkMessage(enterEnt, "Chat", BuildChatMessage(false, "", -1, -1, kNeutralTeamType, GRMessage1), true)
-                Server.SendNetworkMessage("Chat", BuildChatMessage(false, "", -1, -1, kNeutralTeamType, GRMessage1), true)
-                Server.SendNetworkMessage(enterEnt, "Chat", BuildChatMessage(false, "", -1, -1, kNeutralTeamType, GRMessage2), true)
+                Server.SendNetworkMessage("Chat", BuildChatMessage(false, "", -1, -1, kNeutralTeamType, string.format("%s 完成了挑战. 耗时: %d:%02d",enterEnt:GetName(), Minutes, Seconds), true))
                 local mapname = Shared.GetMapName()
                 local grfilename = string.format("config://%s.grstatsV3", mapname)
                 local grstatsline = {}
@@ -341,6 +335,8 @@ if Server then
                     end
                 grstats:close()
                 end
+
+                exitConditionVariable = true
                 if tonumber(enterEnt:GetResources()) <= tonumber(grstatsline[28]) then
                     local grc = 25 -- Setup counter
                     local playerexistsflag = false
@@ -356,10 +352,9 @@ if Server then
                                     existingtopspot = true
                                 end
                                 playerexistsflag = true
+                                Server.SendNetworkMessage(enterEnt, "Chat", BuildChatMessage(false, "", -1, -1, kNeutralTeamType, "你进行了一个记录的超越!"), true)
                         else
-                                local GRMessage1 = "做的好. 但是之前的你做得更好. 再试试吧!"
-                                Print(GRMessage1)
-                                Server.SendNetworkMessage(enterEnt, "Chat", BuildChatMessage(false, "", -1, -1, kNeutralTeamType, GRMessage1), true)
+                                Server.SendNetworkMessage(enterEnt, "Chat", BuildChatMessage(false, "", -1, -1, kNeutralTeamType, "之前的你更棒一点,再试试吧!"), true)
                                 exitConditionVariable = true
                         end
                     end
@@ -400,15 +395,37 @@ if Server then
                         exitConditionVariable = true -- Done
                     end
                 end
-            end
-            local ccheck4grfile = io.open(grfilename,"w")
-                for i = 1,30 do
-                    if grstatsline[i] == nil then -- Just in case?
+                
+                local GRMessage = string.format("服务器排名(%s):",Shared.GetMapName())
+        
+                local rank = 0
+                for i=1,30,3
+                do
+                    rank=rank+1
+                    if grstatsline[i] == nil then -- Just in case
                         grstatsline[i] = "10101010"
+                        grstatsline[i+1] = "10101010"
+                        grstatsline[i+2] = "10101010"
                     end
-                    ccheck4grfile:write(grstatsline[i],"\n")
+
+                    local grtime = grstatsline[i]
+                    local grname = grstatsline[i+1]
+                    local minutes = math.floor(grtime/60)
+                    local seconds = grtime - minutes*60
+                    GRMessage = GRMessage .. string.format("\n#%d <%s>:%d:%02d",  rank, grname, minutes, seconds)
                 end
-                ccheck4grfile:close()
+        
+                Server.SendNetworkMessage(enterEnt, "Chat", BuildChatMessage(false, "", -1, -1, kNeutralTeamType, GRMessage), true)
+            end
+            
+            local ccheck4grfile = io.open(grfilename,"w")
+            for i = 1,30 do
+                if grstatsline[i] == nil then -- Just in case?
+                    grstatsline[i] = "10101010"
+                end
+                ccheck4grfile:write(grstatsline[i],"\n")
+            end
+            ccheck4grfile:close()
             -- all done so send player to readyroom
             Server.ClientCommand(enterEnt, "readyroom")
             elseif self.teamNumber == kTeam2Index then

@@ -116,7 +116,7 @@ function GUIReadyRoomOrders:Initialize()
     self.welcomeText:SetAnchor(GUIItem.Middle, GUIItem.Center)
 -------------------------------------------------------------------
     -- self.welcomeText:SetText(SubstituteBindStrings(Locale.ResolveString("WELCOME_TO_READY_ROOM")))
-    self.welcomeText:SetText("<锅汁尔>赛跑时间到!!!")
+    self.welcomeText:SetText("该 <Gorger> 赛跑了!!!")
 ------------------------------------------------------------------   
     self.welcomeText:SetColor(kFadeOutColor)
     self.welcomeTextStartTime = Shared.GetTime()

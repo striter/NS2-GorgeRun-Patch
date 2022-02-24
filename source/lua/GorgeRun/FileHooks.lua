@@ -21,3 +21,5 @@ ModLoader.SetupFileHook( "lua/BalanceMisc.lua", "lua/GorgeRun/BalanceMisc.lua", 
 ModLoader.SetupFileHook( "lua/Clog.lua", "lua/GorgeRun/Clog.lua", "post" )
 ModLoader.SetupFileHook( "lua/Gamerules.lua", "lua/GorgeRun/Gamerules.lua", "post" )
 ModLoader.SetupFileHook( "lua/NS2Utility.lua", "lua/GorgeRun/NS2Utility.lua", "post" )
+
+ModLoader.SetupFileHook("lua/ConfigFileUtility.lua", "lua/GorgeRun/ShineHook.lua", "post" )

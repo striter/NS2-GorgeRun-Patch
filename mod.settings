@@ -4,6 +4,9 @@ output_dir  = "output"
 description = [=[A patch for gorgerun mod 341 original from TinCans
 https://steamcommunity.com/sharedfiles/filedetails/?id=856857577&searchtext=gorge+run
 
+Show the leaderboard on chat instead of console commands.
+Made some localization
+
 Packed with all maps
 gr_gorgerally
 gr_baconbits

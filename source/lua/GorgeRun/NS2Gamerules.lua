@@ -1001,7 +1001,7 @@ if Server then
             elseif Shared.GetTime() - self.noCommanderStartTime[commanderType] >= kSendNoCommanderMessageRate then
             
                 self.noCommanderStartTime[commanderType] = nil
-                SendTeamMessage(onTeam, kTeamMessageTypes.NoCommander)
+                -- SendTeamMessage(onTeam, kTeamMessageTypes.NoCommander)
                 
             end
             
@@ -1161,8 +1161,8 @@ if Server then
                 self:UpdateHealth()
                 self:UpdateTechPoints()
 
-                self:CheckForNoCommander(self.team1, "MarineCommander")
-                self:CheckForNoCommander(self.team2, "AlienCommander")
+                -- self:CheckForNoCommander(self.team1, "MarineCommander")
+                -- self:CheckForNoCommander(self.team2, "AlienCommander")
                 self:KillEnemiesNearCommandStructureInPreGame(timePassed)
                 
                 self:UpdatePlayerSkill()

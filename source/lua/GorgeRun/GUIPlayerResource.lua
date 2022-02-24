@@ -102,7 +102,7 @@ function GUIPlayerResource:Initialize(style, teamNumber)
     self.pResDescription:SetFontName(GUIPlayerResource.kTextFontName)
     ----------------------------------------------
     --   self.pResDescription:SetText(Locale.ResolveString("RESOURCES"))
-    self.pResDescription:SetText(": GORGE RUN TIMER")
+    self.pResDescription:SetText(":耗时")
     -----------------------------------------------------
     self.background:AddChild(self.pResDescription)
     
