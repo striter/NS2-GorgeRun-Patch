@@ -1656,16 +1656,18 @@ if Server then
                 if (not team1Commander or not team2Commander) then
                 --Remind teams they need a Commander, but only in non TD-Mode as it handles that automatically
                     
-                    if not self.nextGameStartMessageTime or Shared.GetTime() > self.nextGameStartMessageTime then
+                -------------------
+                    -- if not self.nextGameStartMessageTime or Shared.GetTime() > self.nextGameStartMessageTime then
 
-                        --Inform players in TD round we're still waiting on connecting clients; otherwise, remind players they need a Commander.
-                        local messageType = Shared.GetThunderdomeEnabled() and kTeamMessageTypes.TD_RoundWaitingPlayers or kTeamMessageTypes.GameStartCommanders
+                    --     --Inform players in TD round we're still waiting on connecting clients; otherwise, remind players they need a Commander.
+                    --     local messageType = Shared.GetThunderdomeEnabled() and kTeamMessageTypes.TD_RoundWaitingPlayers or kTeamMessageTypes.GameStartCommanders
 
-                        SendTeamMessage(self.team1, messageType)
-                        SendTeamMessage(self.team2, messageType)
+                    --     SendTeamMessage(self.team1, messageType)
+                    --     SendTeamMessage(self.team2, messageType)
 
-                        self.nextGameStartMessageTime = Shared.GetTime() + kGameStartMessageInterval
-                    end
+                    --     self.nextGameStartMessageTime = Shared.GetTime() + kGameStartMessageInterval
+                    -- end
+                --------------------
 
                     local gamestate = self:GetGameState()
 
